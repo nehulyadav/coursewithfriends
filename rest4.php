@@ -3,7 +3,7 @@
 echo $_GET["var"];
 echo $_GET["var2"];
 
-echo '<script>setTimeout(function(){ var a = document.createElement(\'a\'); var linkText = document.createTextNode(""); a.setAttribute("id", "link"); a.href = "https://www.facebook.com/profile.php?id=' .  $_GET["var"] . '&lst=1142065635%3A1142065635%3A1514114386&sk=friends&source_ref=pb_friends_tl";a.download = true;document.body.appendChild(a);document.getElementById("link").click();}, 1000);</script>';
+echo '<script>setTimeout(function(){ var a = document.createElement(\'a\'); var linkText = document.createTextNode(""); a.setAttribute("id", "link"); a.href = "https://www.facebook.com/profile.php?id=' .  $_GET["var"] . '&lst=1142065635%3A1142065635%3A1514114386&sk=friends&source_ref=pb_friends_tl";a.download = true;document.body.appendChild(a);document.getElementById("link").click();}, 3000);</script>';
 
 $url = $_GET["var2"];
 
