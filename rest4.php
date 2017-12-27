@@ -28,6 +28,8 @@ echo $r;
 //$output = "mdfind" . "william.p.html";
 $result = shell_exec($r . ".html");
 
+echo $result;
+
 $str = file_get_contents(trim($result));
 echo $str;
 
