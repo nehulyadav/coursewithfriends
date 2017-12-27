@@ -52,9 +52,9 @@ $un = str_replace("\"", "", $a[$i]);
 
 $k = strpos($un, "-");
 
-echo '<script> var person = prompt("Hang tight for your friends list... Till then, what courses will you take next semester?");
+// echo '<script> var person = prompt("Hang tight for your friends list... Till then, what courses will you take next semester?");
 
-</script>';
+// </script>';
 
 $url= "https://graph.facebook.com/v2.5/" . substr($un, 0, $k) . "?access_token=EAAMkG1ZAcjB8BAGZAE1WjeXXhuSV8qk3PZBZAOT395NM9wZBTFU8ZBiZC2MYi1vap0VidwWjmN0QZAbkuCNbUaOZA9fkh4XUSiMXROMcYEFksz2gNYmutRlBAkuIlbkkLvYHSs3tORp6r6hEZBbeFTjFj0xHiDYA6ZCLdIWUyAbzTm0gwZDZD";
 
