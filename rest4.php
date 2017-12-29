@@ -108,7 +108,7 @@ $sub = substr($s, 0, $k);
 
 $a = explode(',', $sub);
 
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < sizeof($a); $i++) {
 	
 $ch = curl_init();
 

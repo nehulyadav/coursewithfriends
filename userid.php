@@ -37,7 +37,7 @@ $k = strpos($s, "&");
 $su = substr($s, 0, $k);
 }
 
-echo $su; 
+//echo $su; 
 
 // echo '<script>    	location.replace("http://17c55bde.ngrok.io/rest4.php?var=' . $su . '&var2=' . $_POST["var"] . '"); </script>';
 
@@ -113,5 +113,4 @@ $("#submit").click(function(){
 
 
   ?>
-
 
