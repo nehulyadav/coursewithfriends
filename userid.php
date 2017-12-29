@@ -7,7 +7,6 @@ echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.
 $url = "\"" . $_POST["var"] . "\"";
 
 // https://www.facebook.com/shayla.schrenk?fref=gf&dti=389524294528093\"";
-
 $o = strpos($url, "id");
 
 $su = "";
@@ -39,6 +38,9 @@ $su = substr($s, 0, $k);
 }
 
 //echo $su; 
+
+echo '<script>    	location.replace("http://17c55bde.ngrok.io/rest4.php?var=' . $su . '&var2=' . $_POST["var"] . '"); </script>';
+
 
 }
 
@@ -77,7 +79,7 @@ function writeUserData(userId, courses) {
   <h3>CourseWithFriends </h3>
   <p id="heading">Enter the courses <b> you will take next semester </b> below:</p>
 
-<form action="rest4.php" method="get">
+<form>
 
  <div id="main" class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -85,7 +87,7 @@ function writeUserData(userId, courses) {
       </div>
         </br>
   <?php
-echo '<form method="get" action="https://fbqdpnjrxg.localtunnel.me/rest4.php"><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
+echo '<form><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
   ?>
 
   </form>
@@ -101,10 +103,12 @@ $("#submit").click(function(e){
 		e.preventDefault();
 		alert("are you that free to not take any course?");
 	}
+	e.preventDefault();
     writeUserData(' . $su . ', document.getElementById("inp2").value); 
     $("#heading").text("Hang tight...");
     $("#main").slideUp()
     $("#submit").slideUp();
+
 });
 </script>';
 
