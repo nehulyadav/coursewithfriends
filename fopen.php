@@ -5,6 +5,8 @@
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>
 <script>
+
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBgZMBRsqCnAlpuAdVVWatFG0_Zd2mCbzM",
@@ -25,11 +27,92 @@ function writeUserData(userId, courses) {
 
  </script>
 
+
+<style>
+* { box-sizing: border-box; }
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#vidtop-content {
+  top: 0;
+  color: #fff;
+}
+.vid-info2 { position: absolute; bottom: 0; right: 0; width: 50%; color: #A9A9A9 ; padding: 1rem; font-family: Avenir, Helvetica, sans-serif; }
+.vid-info { position: absolute; top: 0; right: 0; width: 33%; background: rgba(0,0,0,0.3); color: #fff; padding: 1rem; font-family: Avenir, Helvetica, sans-serif; }
+.vid-info h1 { font-size: 2rem; font-weight: 700; margin-top: 0; line-height: 1.2; }
+.vid-info a { display: block; color: #fff; text-decoration: none; background: rgba(0,0,0,0.5); transition: .6s background; border-bottom: none; margin: 1rem auto; text-align: center; }
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { width: 300%; left: -100%; }
+}
+@media all and (max-width: 600px) {
+.vid-info { width: 50%; padding: .5rem; }
+.vid-info h1 { margin-bottom: .2rem; }
+}
+@media all and (max-width: 500px) {
+.vid-info .acronym { display: none; }
+}
+
+</style>
+
+<script>
+setTimeout(fade_out, 5000);
+
+function fade_out() {
+  $("#bottom").fadeOut().empty();
+}
+
+</script>
+
+<div class="video-background">
+    <div class="video-foreground">
+      <iframe src="https://www.youtube.com/embed/gqud6kAP1us?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=gqud6kAP1us" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+<div id="vidtop-content">
+<div class="vid-info">
+    <h1>CourseWithFriends</h1>
+   <table id="myTable" class="table table-hover">
+    <thead>
+      <tr>
+        <th>Miami Friend</th>
+        <th>Course</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  </div>
+
+  <div id="bottom" class="vid-info2">
+   Video src - https://www.youtube.com/watch?v=gqud6kAP1us </br>
+   If you want me to take down the video, email me at nehul12@gmail.com with a subject line "Take the Video down" and I will take it down immediately. I no way mean to violate the copyright laws.
+  </div>
+
+</div>
+
+
 <?php
 
 echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
 echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
 echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+
 
 // $url = $_GET["var2"];
 
@@ -122,8 +205,8 @@ $output = shell_exec('curl ' . $url);
 
 $json = json_decode($output, true);
 
-echo $json['name'];
 
+echo '<span style="color:#ffffff">' . $json["name"] . '</span>';
 
 echo "
 <script>
@@ -133,7 +216,7 @@ echo "
     var courses = childSnapshot.val().courses;
                    if (user == "
                     . $a[$i] . ") {
-                    				$('<tr><td>" . $json['name'] . "</td><td>' + courses + '</td></tr>').appendTo('#myTable tbody');
+                            $('<tr><td>" . $json['name'] . "</td><td>' + courses + '</td></tr>').appendTo('#myTable tbody');
                    }
 
 
@@ -143,6 +226,10 @@ echo "
 </script>
 
 ";
+
+
+
+
 
 // echo "
 // <script>
@@ -166,3 +253,4 @@ curl_close ($ch);
 // echo '<form method="get" action="rest5.php"><input type="hidden" name="var2" value=' . $_GET["var2"] . '><input type="submit"></form>';
 
 ?>
+

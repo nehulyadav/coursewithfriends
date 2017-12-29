@@ -1,12 +1,27 @@
-<input type="file">Upload the downloaded file</input>
+<?php
+echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
+?>
+
+<div id="container" class="container">
+  <h3>CourseWithFriends </h3>
+  <p id="heading">Upload the file <b> that just downloaded </b> below:</p>
+<input type="file"></input>
+ 
+  <!-- <?php
+// echo '<input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><button class="btn btn-success" id="submit">Now show me what my friends are taking!</button>';
+  ?> -->
+
+
+</div>
+
 <?php  
 
 // echo $_GET["var"];
 // echo $_GET["var2"];
 
-echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
-echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
-echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
+
 
 echo '
 <script>
@@ -67,7 +82,6 @@ input.onchange = function(e) {
 			setCookie("check1", temp);
  	        }
   }
-  alert(getCookie("check1"));
   location.replace("fopen.php");
 
   }
@@ -83,21 +97,6 @@ input.onchange = function(e) {
 
 
 ?>
-
-<div id="container" class="container">
-  <h3>CourseWithFriends </h3>
-  <p id="heading">Below <b> are your friends and the courses </b> they will be taking next semester:</p>
-  <table id="myTable" class="table table-hover">
-    <thead>
-      <tr>
-        <th>Friend's Name</th>
-        <th>Courses for Spring 2018</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    </table>
-      </div>
 
       <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
