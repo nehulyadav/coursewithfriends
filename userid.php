@@ -85,7 +85,7 @@ function writeUserData(userId, courses) {
       </div>
         </br>
   <?php
-echo '<form method="get" action="https://xvxssuxdle.localtunnel.me/rest4.php"><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
+echo '<form method="get" action="https://fbqdpnjrxg.localtunnel.me/rest4.php"><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
   ?>
 
   </form>
