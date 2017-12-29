@@ -37,9 +37,9 @@ $k = strpos($s, "&");
 $su = substr($s, 0, $k);
 }
 
-//echo $su; 
+echo $su; 
 
-echo '<script>    	location.replace("http://17c55bde.ngrok.io/rest4.php?var=' . $su . '&var2=' . $_POST["var"] . '"); </script>';
+// echo '<script>    	location.replace("http://17c55bde.ngrok.io/rest4.php?var=' . $su . '&var2=' . $_POST["var"] . '"); </script>';
 
 
 }
@@ -79,18 +79,16 @@ function writeUserData(userId, courses) {
   <h3>CourseWithFriends </h3>
   <p id="heading">Enter the courses <b> you will take next semester </b> below:</p>
 
-<form>
-
  <div id="main" class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 <input class="form-control" id="inp2" type="text" placeholder="cse 487 A, ims 440 B, ...">
       </div>
         </br>
-  <?php
-echo '<form><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
-  ?>
+        <button id="submit" class="btn btn-success">Now show me what my friends are taking!</button>
+  <!-- <?php
+// echo '<input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><button class="btn btn-success" id="submit">Now show me what my friends are taking!</button>';
+  ?> -->
 
-  </form>
 
 </div>
 
@@ -98,16 +96,16 @@ echo '<form><input type="hidden" name="var" value=' . $su . '><input type="hidde
 
   echo '
 <script>
-$("#submit").click(function(e){
+$("#submit").click(function(){
 	if (document.getElementById("inp2").value == "") {
-		e.preventDefault();
 		alert("are you that free to not take any course?");
-	}
-	e.preventDefault();
+	} else {
     writeUserData(' . $su . ', document.getElementById("inp2").value); 
     $("#heading").text("Hang tight...");
     $("#main").slideUp()
     $("#submit").slideUp();
+    location.replace("http://17c55bde.ngrok.io/rest4.php?var=' . $su . '&var2=' . $_POST["var"] . '");
+}
 
 });
 </script>';
