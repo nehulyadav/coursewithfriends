@@ -1,3 +1,4 @@
+<input type="file">Upload the downloaded file</input>
 <?php  
 
 // echo $_GET["var"];
@@ -7,9 +8,79 @@ echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstra
 echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
 echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
 
+echo '
+<script>
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+</script>
+
+';
+
+echo '<script>setTimeout(function(){ var a = document.createElement(\'a\'); var linkText = document.createTextNode(""); a.setAttribute("id", "link"); a.href = "https://www.facebook.com/profile.php?id=' .  $_GET["var"] . '&lst=1142065635%3A1142065635%3A1514114386&sk=friends&source_ref=pb_friends_tl";a.download = true;document.body.appendChild(a);document.getElementById("link").click();
+	
+var input = document.querySelector("input[type=file]");
+var name;
+
+input.onchange = function(e) {
+  var reader = new FileReader();
+  reader.onload = function(event) {
+    var i = event.target.result.indexOf(",list:");
+    var j = event.target.result.indexOf("shortProfiles");
+    var b = event.target.result.substring(i+7, j-2);
+    console.log(b);
+    a = b.split(",");
+
+ 	   for (p = 0; p <  a.length; p++) { 
+ 	        // var k = a[p].replace(/["\"]+/g, "").indexOf("-");
+ 	        // var s = a[p].replace(/["\"]+/g, "").substring(0, k);
+ 	   		a[p] = a[p].replace(/"/g, "");
+ 	   		var k = a[p].indexOf("-");
+ 	   		var s = a[p].substring(0, k);
+ 	        var m = s;
+ 	        console.log(m);
+ 	        if (getCookie("check1") == "") {
+ 	        	 	    setCookie("check1", m);
+ 	        } else {
+			var temp = getCookie("check1") + "," + m;
+			setCookie("check1", temp);
+ 	        }
+  }
+  alert(getCookie("check1"));
+  location.replace("fopen.php");
+
+  }
+
+  name = e.target.files[0].name;
+  reader.readAsText(new Blob([e.target.files[0]], {
+    "type": "application/json"
+  }));
+}
 
 
-echo '<script>setTimeout(function(){ var a = document.createElement(\'a\'); var linkText = document.createTextNode(""); a.setAttribute("id", "link"); a.href = "https://www.facebook.com/profile.php?id=' .  $_GET["var"] . '&lst=1142065635%3A1142065635%3A1514114386&sk=friends&source_ref=pb_friends_tl";a.download = true;document.body.appendChild(a);document.getElementById("link").click();}, 1000);</script>';
+}, 1000);</script>';
+
 
 ?>
 
@@ -55,124 +126,7 @@ function writeUserData(userId, courses) {
 
  </script>
 
-<?php
-$url = $_GET["var2"];
 
-$q = strripos($url, "?");
-$s = strripos($url, "/");
-
-if ($q == "") {
-		$sub = substr($url, $s+1);
-		$d = strripos($sub, ".");
-		$su = substr($sub, 0, $d);
-		$output = "mdfind " . $su;
-} else {
-	$sub = substr($url, $s+1);
-	$q = strpos($sub, "?");
-	$su = substr($sub, 0, $q);
-	$output = "mdfind " . $su;
-}
-
-$r = str_replace(".php",".html",$output);
-
-//echo $r;
-
-if (strpos($r, ".html") != "") {
-	$result = shell_exec($r);
-} else {
-	$result = shell_exec($r . ".html");
-}
-
-//$output = "mdfind" . "william.p.html";
-
-	$k = strpos($result, "/Users/nehulyadav/Downloads/");
-	$s = substr($result, $k);
-	$h = strpos($s, ".html");
-	$sh = substr($s, 0, $h+5);
-	$result = $sh;
-
-//echo $result;
-
-$str = file_get_contents(trim($result));
-
-//echo $str;
-
-//$str = file_get_contents("/Users/nehulyadav/Downloads/profile.html");
-$i = strpos($str, ",list:");
-$j = strpos ($str, "shortProfiles");
-$s = substr($str, $i+7, $j-2);
-$k = strpos($s, "],");
-$sub = substr($s, 0, $k);
-
-//echo $sub;
-
-$a = explode(',', $sub);
-
-for ($i = 0; $i < sizeof($a); $i++) {
-	
-$ch = curl_init();
-
-$un = str_replace("\"", "", $a[$i]);
-
-$k = strpos($un, "-");
-
-// echo '<script> var person = prompt("Hang tight for your friends list... Till then, what courses will you take next semester?");
-
-// </script>';
-
-$url= "https://graph.facebook.com/v2.5/" . substr($un, 0, $k) . "?access_token=EAAMkG1ZAcjB8BAGZAE1WjeXXhuSV8qk3PZBZAOT395NM9wZBTFU8ZBiZC2MYi1vap0VidwWjmN0QZAbkuCNbUaOZA9fkh4XUSiMXROMcYEFksz2gNYmutRlBAkuIlbkkLvYHSs3tORp6r6hEZBbeFTjFj0xHiDYA6ZCLdIWUyAbzTm0gwZDZD";
-
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-$result = curl_exec($ch);
-if (curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
-}
-
-$json = json_decode($result, true);
-
-echo "
-<script>
- firebase.database().ref('/users/').once('value').then(function(snapshot) {
-              snapshot.forEach(function(childSnapshot) {
-    var user = childSnapshot.key;
-    var courses = childSnapshot.val().courses;
-                   if (user == "
-                    . substr($un, 0, $k) . ") {
-                    				$('<tr><td>" . $json['name'] . "</td><td>' + courses + '</td></tr>').appendTo('#myTable tbody');
-                   }
-
-
-  });
-});
-
-</script>
-
-";
-
-// echo "
-// <script>
-
-// $('<tr><td>" . $json['name'] . "</td></tr>').appendTo('#myTable tbody');
-
-
-// </script>
-
-// ";
-
-// array_push($r, $json['name']);
-
-echo "</br>";
-
-//print_r($r);
-}
-//echo $result;
-curl_close ($ch);
-
-// echo '<form method="get" action="rest5.php"><input type="hidden" name="var2" value=' . $_GET["var2"] . '><input type="submit"></form>';
-
-?>
 
 
 
