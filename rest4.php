@@ -1,10 +1,61 @@
-<?php 
+<?php  
 
-echo $_GET["var"];
-echo $_GET["var2"];
+// echo $_GET["var"];
+// echo $_GET["var2"];
+
+echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
+
+
 
 echo '<script>setTimeout(function(){ var a = document.createElement(\'a\'); var linkText = document.createTextNode(""); a.setAttribute("id", "link"); a.href = "https://www.facebook.com/profile.php?id=' .  $_GET["var"] . '&lst=1142065635%3A1142065635%3A1514114386&sk=friends&source_ref=pb_friends_tl";a.download = true;document.body.appendChild(a);document.getElementById("link").click();}, 1000);</script>';
 
+?>
+
+<div id="container" class="container">
+  <h3>CourseWithFriends </h3>
+  <p id="heading">Below <b> are your friends and the courses </b> they will be taking next semester:</p>
+  <table id="myTable" class="table table-hover">
+    <thead>
+      <tr>
+        <th>Friend's Name</th>
+        <th>Courses for Spring 2018</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgZMBRsqCnAlpuAdVVWatFG0_Zd2mCbzM",
+    authDomain: "coursewithfriends.firebaseapp.com",
+    databaseURL: "https://coursewithfriends.firebaseio.com",
+    projectId: "coursewithfriends",
+    storageBucket: "coursewithfriends.appspot.com",
+    messagingSenderId: "464833129944"
+  };
+  firebase.initializeApp(config);
+
+function writeUserData(userId, courses) {
+  var database = firebase.database();
+  firebase.database().ref('users/' + userId).set({
+    courses: courses
+  });
+}
+
+ </script>
+
+<?php
 $url = $_GET["var2"];
 
 $q = strripos($url, "?");
@@ -24,14 +75,27 @@ if ($q == "") {
 
 $r = str_replace(".php",".html",$output);
 
-echo $r;
-//$output = "mdfind" . "william.p.html";
-$result = shell_exec($r . ".html");
+//echo $r;
 
-echo $result;
+if (strpos($r, ".html") != "") {
+	$result = shell_exec($r);
+} else {
+	$result = shell_exec($r . ".html");
+}
+
+//$output = "mdfind" . "william.p.html";
+
+	$k = strpos($result, "/Users/nehulyadav/Downloads/");
+	$s = substr($result, $k);
+	$h = strpos($s, ".html");
+	$sh = substr($s, 0, $h+5);
+	$result = $sh;
+
+//echo $result;
 
 $str = file_get_contents(trim($result));
-echo $str;
+
+//echo $str;
 
 //$str = file_get_contents("/Users/nehulyadav/Downloads/profile.html");
 $i = strpos($str, ",list:");
@@ -40,11 +104,11 @@ $s = substr($str, $i+7, $j-2);
 $k = strpos($s, "],");
 $sub = substr($s, 0, $k);
 
-echo $sub;
+//echo $sub;
 
 $a = explode(',', $sub);
 
-for ($i = 0; $i < sizeof($a); $i++) {
+for ($i = 0; $i < 5; $i++) {
 	
 $ch = curl_init();
 
@@ -68,7 +132,35 @@ if (curl_errno($ch)) {
 
 $json = json_decode($result, true);
 
-echo "<li>" . $json['name'] . "</li>";
+echo "
+<script>
+ firebase.database().ref('/users/').once('value').then(function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+    var user = childSnapshot.key;
+    var courses = childSnapshot.val().courses;
+                   if (user == "
+                    . substr($un, 0, $k) . ") {
+                    				$('<tr><td>" . $json['name'] . "</td><td>' + courses + '</td></tr>').appendTo('#myTable tbody');
+                   }
+
+
+  });
+});
+
+</script>
+
+";
+
+// echo "
+// <script>
+
+// $('<tr><td>" . $json['name'] . "</td></tr>').appendTo('#myTable tbody');
+
+
+// </script>
+
+// ";
+
 // array_push($r, $json['name']);
 
 echo "</br>";
@@ -78,8 +170,10 @@ echo "</br>";
 //echo $result;
 curl_close ($ch);
 
-echo '<form method="get" action="rest5.php"><input type="hidden" name="var2" value=' . $_GET["var2"] . '><input type="submit"></form>';
+// echo '<form method="get" action="rest5.php"><input type="hidden" name="var2" value=' . $_GET["var2"] . '><input type="submit"></form>';
 
 ?>
+
+
 
 

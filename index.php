@@ -528,27 +528,30 @@ document.getElementById("link1").click();
   <h3>CourseWithFriends </h3>
   <p id="heading">Enter your <b> Facebook personal profile URL </b> below:</p>
   
-  <form>
+  <!-- <form>
     <div class="input-group" id="main">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
       <input id="facebook" type="text" class="form-control" name="facebook" placeholder="https://facebook.com/YourProfile">
     </div>
       </br>
-          <button id="button" type="button" class="btn btn-success" onclick="getFriends()">Make it happen!</button>
+<!-          <button id="button" type="button" class="btn btn-success" onclick="getFriends()">Make it happen!</button>
+ -->
 
+ <!--  </form>  -->
 
-  </form>
-
-
-  <form action="rest4.php" method="post">
-  <input id="inp" type="text" name="var">
-  <input id="submit" type="submit">
-  </form>
 
    <form action="userid.php" method="post">
-  <input id="inp2" type="text" name="var">
-  <input id="submit2" type="submit">
+
+ <div class="input-group" id="main">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input class="form-control" id="inp2" type="text" name="var" placeholder="https://facebook.com/YourProfile">
+      </div>
+        </br>
+          <input class="btn btn-success" id="submit2" type="submit">
+
+  
   </form>
+
 
 </div>
 

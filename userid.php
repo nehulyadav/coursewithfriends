@@ -1,19 +1,23 @@
 <?php
-echo $_POST["var"];
 
+//echo $_POST["var"];
+echo '  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+echo '  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+echo '   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
 $url = "\"" . $_POST["var"] . "\"";
 
 // https://www.facebook.com/shayla.schrenk?fref=gf&dti=389524294528093\"";
 
 $o = strpos($url, "id");
 
+$su = "";
 if ($o != "") {
 	$s = substr($url, $o+3);
 	$a = strpos($s, "&");
 	if ($a == "") {
-			echo str_replace('"', "", substr($url, $o+3));
+			$su = str_replace('"', "", substr($url, $o+3));
 	} else {
-		echo substr($s, 0, $a);
+		$su = substr($s, 0, $a);
 	}
 
 } else {
@@ -34,12 +38,78 @@ $k = strpos($s, "&");
 $su = substr($s, 0, $k);
 }
 
-echo $su;
-
-echo '<form method="get" action="rest4.php"><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input type="submit"></form>';
+//echo $su; 
 
 }
 
 
-
 ?>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgZMBRsqCnAlpuAdVVWatFG0_Zd2mCbzM",
+    authDomain: "coursewithfriends.firebaseapp.com",
+    databaseURL: "https://coursewithfriends.firebaseio.com",
+    projectId: "coursewithfriends",
+    storageBucket: "coursewithfriends.appspot.com",
+    messagingSenderId: "464833129944"
+  };
+  firebase.initializeApp(config);
+
+function writeUserData(userId, courses) {
+  var database = firebase.database();
+  firebase.database().ref('users/' + userId).set({
+    courses: courses
+  });
+}
+
+ </script>
+
+<div id="container" class="container">
+  <h3>CourseWithFriends </h3>
+  <p id="heading">Enter the courses <b> you will take next semester </b> below:</p>
+
+<form action="rest4.php" method="get">
+
+ <div id="main" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input class="form-control" id="inp2" type="text" placeholder="cse 487 A, ims 440 B, ...">
+      </div>
+        </br>
+  <?php
+echo '<form method="get" action="https://xvxssuxdle.localtunnel.me/rest4.php"><input type="hidden" name="var" value=' . $su . '><input type="hidden" name="var2" value=' . $_POST["var"] . '><input class="btn btn-success" id="submit" type="submit" value="Now show me what my friends are taking!"></form>';
+  ?>
+
+  </form>
+
+</div>
+
+  <?php
+
+  echo '
+<script>
+$("#submit").click(function(e){
+	if (document.getElementById("inp2").value == "") {
+		e.preventDefault();
+		alert("are you that free to not take any course?");
+	}
+    writeUserData(' . $su . ', document.getElementById("inp2").value); 
+    $("#heading").text("Hang tight...");
+    $("#main").slideUp()
+    $("#submit").slideUp();
+});
+</script>';
+
+
+
+  ?>
+
+
