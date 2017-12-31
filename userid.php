@@ -1,3 +1,19 @@
+<style>
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: indigo;
+   color: white;
+   text-align: center;
+}
+
+
+
+</style>
+
 <?php
 
 //echo $_POST["var"];
@@ -114,3 +130,12 @@ $("#submit").click(function(){
 
   ?>
 
+<div class="footer">
+ 
+
+<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fcoursewithfriends.herokuapp.com&width=51&layout=box_count&action=like&size=small&show_faces=false&share=false&height=65&appId" width="51" height="55" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+ <p>
+    A Nehul Yadav Production 
+    </p>
+</div>

@@ -9,12 +9,24 @@ textarea {
   height: 300px;
 }
 
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: indigo;
+   color: white;
+   text-align: center;
+}
+
+
+
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -606,6 +618,14 @@ input.onchange = function(e) {
   }));
 }
     </script>
+<div class="footer">
+ 
 
+<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fcoursewithfriends.herokuapp.com&width=51&layout=box_count&action=like&size=small&show_faces=false&share=false&height=65&appId" width="51" height="55" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+ <p>
+    A Nehul Yadav Production 
+    </p>
+</div>
 </body>
 </html>
